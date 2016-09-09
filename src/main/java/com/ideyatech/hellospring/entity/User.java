@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class User {
 	private String firstname, middlename, lastname,
-				email, password, role;
+				email, password, confirmPassword, role;
 	private Date birthdate;
 
 	public String getFirstname() {
@@ -61,6 +61,14 @@ public class User {
 
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	
