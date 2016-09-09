@@ -29,8 +29,8 @@ public class UserValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthdate", 
 				"error.emptyOrWrongFormat", new Object[]{"Birthdate"});
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", 
-				"error.required", new Object[]{"Email"});
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", 
+//				"error.required", new Object[]{"Email"});
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", 
 				"error.required", new Object[]{"Password"});

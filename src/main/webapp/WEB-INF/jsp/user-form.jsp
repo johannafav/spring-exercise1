@@ -12,15 +12,20 @@
 <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
 </head>
 <body>
-<div class="container">
+<div class="container" style="margin-top:5px">
+<div class="panel panel-default">
+<div class="panel-heading">
+    <h3 class="panel-title">User Registration</h3>
+  </div>
+  <div class="panel-body">
 	<form:form commandName="user" modelAttribute="user" action="/registration" method="POST" class="form-horizontal">
-		<div class="form-group">
+		<div class="form-group" cssErrorClass="has-error">
 			<form:label path="firstname" cssClass="col-md-2 control-label" cssErrorClass="col-md-2 control-label">
 				<spring:message code="label.firstname"></spring:message>
 			</form:label>
 			<div class="col-md-10">
 				<form:input path="firstname" placeholder="First Name" class="form-control" cssErrorClass="form-control"/> <br/>
-				<form:errors path="*" cssClass="text-danger"/>
+				<form:errors path="firstname" cssClass="text-danger"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -36,13 +41,16 @@
 				<spring:message code="label.lastname"></spring:message>
 			</form:label>
 			<div class="col-md-10">
-			<form:input path="lastname" placeholder="Last Name" class="form-control"/> <br/>
+				<form:input path="lastname" placeholder="Last Name" class="form-control"/> <br/>
+				<form:errors path="lastname" cssClass="text-danger"/>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label">Birth date</label>
+			<form:label path="birthdate" cssClass="col-md-2 control-label" cssErrorClass="col-md-2 control-label has-error">
+				<spring:message code="label.birthdate"></spring:message>
+			</form:label>
 			<div class="col-md-10">
-			<form:input path="birthdate" placeholder="Birthdate (yyyy-MM-dd)" class="form-control"/> <br/>
+				<form:input path="birthdate" placeholder="Birthdate (yyyy-MM-dd)" class="form-control"/> <br/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -50,19 +58,22 @@
 				<spring:message code="label.email"></spring:message>
 			</form:label>
 			<div class="col-md-10">
-			<form:input path="email" placeholder="Email" class="form-control"/> <br/>
+				<form:input path="email" placeholder="Email" class="form-control"/> <br/>
+				<form:errors path="email" cssClass="text-danger"/>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-2 control-label">Password</label>
 			<div class="col-md-10">
-			<form:password path="password" placeholder="Password" class="form-control"/> <br/>
+				<form:password path="password" placeholder="Password" class="form-control"/> <br/>
+				<form:errors path="password" cssClass="text-danger"/>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-md-2 control-label">Confirm password</label>
 			<div class="col-md-10">
-			<form:password path="confPassword" placeholder="Password" class="form-control"/> <br/>
+				<form:password path="confirmPassword" placeholder="Password" class="form-control"/> <br/>
+				<form:errors path="confirmPassword" cssClass="text-danger"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -80,6 +91,8 @@
 			</div>
 		</div>
 	</form:form>
+	</div>
+	</div>
 	</div>
 </body>
 </html>
