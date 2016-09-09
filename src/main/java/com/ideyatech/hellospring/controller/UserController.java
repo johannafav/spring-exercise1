@@ -52,6 +52,7 @@ public class UserController {
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public ModelAndView submitForm(@Valid @ModelAttribute User user, BindingResult bindingResult, ModelMap map,
 			HttpServletRequest request, HttpServletResponse response) {
+		
 		map.addAttribute("firstname", user.getFirstname());
 		map.addAttribute("middlename", user.getMiddlename());
 		map.addAttribute("lastname", user.getLastname());
@@ -59,6 +60,7 @@ public class UserController {
 		map.addAttribute("password", user.getPassword());
 		map.addAttribute("role", user.getRole());
 		
+
 		if(bindingResult.hasErrors()){
 			return new ModelAndView("/user-form");
 		}
