@@ -2,6 +2,7 @@ package com.ideyatech.hellospring.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,36 +50,42 @@ public class UserController {
 		return "user-form";
 	}
 	
+//	@RequestMapping(value="/list")
+//	public String getEmployeeList(ModelMap model) {
+//		List<Employee> employees = employeeRepository.findAll();
+//		model.addAttribute("employees", employees);
+//		return "employee-list";
+//	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
 		binder.addValidators(userValidator);
 	}
 	
-	@RequestMapping(value="/registration/{id}")
-	public @ResponseBody String getUser(@PathVariable("id") Long id) {
-		return userRepository.findOne(id).toString();
+	@RequestMapping(value="/registration/{id}", produces = {"application/json"})
+	public @ResponseBody String getUser(@PathVariable("id") Long id, ModelMap map) {
+		System.out.println(id);
+		User u = (User) userRepository.findOne(id);
+		map.addAttribute("firstname",u.getFirstname());
+		return u.toString();
 	}
 	
 	@RequestMapping(value="/registration", method = RequestMethod.POST)
 	public ModelAndView submitForm(@Valid @ModelAttribute User user, BindingResult bindingResult, ModelMap map,
-			HttpServletRequest request, HttpServletResponse response) {
-		
-		map.addAttribute("firstname", user.getFirstname());
-		map.addAttribute("middlename", user.getMiddlename());
-		map.addAttribute("lastname", user.getLastname());
-		map.addAttribute("email", user.getEmail());
-		map.addAttribute("password", user.getPassword());
-		map.addAttribute("role", user.getRole());
-		
+			HttpServletRequest request, HttpServletResponse response) {	
 
 		if(bindingResult.hasErrors()){
 			return new ModelAndView("/user-form");
 		}
 		else{
-			
-			if(user.getRole().equals("User")) return new ModelAndView("redirect:/skills");
-			else return new ModelAndView("/user-form");
+			userRepository.save(user);
+			List<User> users = userRepository.findAll();
+			map.addAttribute("users", users);
+			if(user.getRole().equals("Admin")) return new ModelAndView("user-list");
+			else return new ModelAndView("redirect:/skills");
+//			if(user.getRole().equals("User")) return new ModelAndView("redirect:/skills");
+//			else return new ModelAndView("/user-form");
 		}
 	
 	}

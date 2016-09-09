@@ -1,6 +1,11 @@
 package com.ideyatech.hellospring.entity;
 
-public class Skill {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="SKILL")
+public class Skill extends BaseEntity{
 	private String name;
 	private int skillLevel;
 	
