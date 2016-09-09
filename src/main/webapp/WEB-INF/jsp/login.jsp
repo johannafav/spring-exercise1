@@ -13,10 +13,11 @@
 </head>
 <body>
 	<div class="container">
-		<form:form commandName="user" action="/registration" attributeModel="user" class="form-signin">
+		<form:form commandName="user" action="/" attributeModel="user" method="POST" class="form-signin">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<form:input path="email" placeholder="Email" class="form-control"/>
 				<form:password path="password" placeholder="Password" class="form-control"/>
+				<form:errors path="email"></form:errors>
 				<form:button class="btn btn-lg btn-primary btn-block">Sign in</form:button>
 		</form:form>
 	</div>

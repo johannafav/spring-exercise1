@@ -33,6 +33,7 @@
 									<td>${user.firstname } ${user.middlename } ${user.lastname }</td>
 									<td>${user.birthdate }</td>
 									<td>${user.email }</td>
+									<td><button type="button">View</button></td>
 								</tr>
 								<!-- Modal -->
 								<div class="modal fade" id="${user.id }" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
