@@ -13,21 +13,28 @@
 </head>
 <body>
 <div class="container">
-	<form:form commandName="user" modelAttribute="user" action="/user" method="POST" class="form-horizontal">
+	<form:form commandName="user" modelAttribute="user" action="/registration" method="POST" class="form-horizontal">
 		<div class="form-group">
-			<label class="col-md-2 control-label">First name</label>
+			<form:label path="firstname" cssClass="col-md-2 control-label" cssErrorClass="col-md-2 control-label">
+				<spring:message code="label.firstname"></spring:message>
+			</form:label>
 			<div class="col-md-10">
-				<form:input path="firstname" placeholder="First Name" class="form-control"/> <br/>
+				<form:input path="firstname" placeholder="First Name" class="form-control" cssErrorClass="form-control"/> <br/>
+				<form:errors path="*" cssClass="text-danger"/>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label">Middle name</label>
+			<form:label path="middlename" cssClass="col-md-2 control-label" cssErrorClass="col-md-2 control-label has-error">
+				<spring:message code="label.middlename"></spring:message>
+			</form:label>
 			<div class="col-md-10">
 				<form:input path="middlename" placeholder="Middle Name" class="form-control"/> <br/>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label">Last name</label>
+			<form:label path="lastname" cssClass="col-md-2 control-label" cssErrorClass="col-md-2 control-label has-error">
+				<spring:message code="label.lastname"></spring:message>
+			</form:label>
 			<div class="col-md-10">
 			<form:input path="lastname" placeholder="Last Name" class="form-control"/> <br/>
 			</div>
@@ -39,7 +46,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label">Email</label>
+			<form:label path="email" cssClass="col-md-2 control-label" cssErrorClass="col-md-2 control-label has-error">
+				<spring:message code="label.email"></spring:message>
+			</form:label>
 			<div class="col-md-10">
 			<form:input path="email" placeholder="Email" class="form-control"/> <br/>
 			</div>
@@ -48,6 +57,12 @@
 			<label class="col-md-2 control-label">Password</label>
 			<div class="col-md-10">
 			<form:password path="password" placeholder="Password" class="form-control"/> <br/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-2 control-label">Confirm password</label>
+			<div class="col-md-10">
+			<form:password path="confPassword" placeholder="Password" class="form-control"/> <br/>
 			</div>
 		</div>
 		<div class="form-group">

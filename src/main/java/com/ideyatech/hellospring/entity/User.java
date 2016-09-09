@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class User {
 	private String firstname, middlename, lastname,
-				email, password, role;
+				email, password, confPassword, role;
 	private Date birthdate;
 
 	public String getFirstname() {
@@ -45,6 +45,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfPassword() {
+		return confPassword;
+	}
+
+	public void setConfPassword(String confPassword) {
+		this.confPassword = confPassword;
 	}
 
 	public String getRole() {
