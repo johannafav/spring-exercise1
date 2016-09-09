@@ -2,6 +2,7 @@ package com.ideyatech.hellospring.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,6 +50,40 @@ public class UserController {
 		return "user-form";
 	}
 	
+	@RequestMapping(value="/", method = RequestMethod.POST)
+	public ModelAndView loginSubmit(@ModelAttribute User user, BindingResult bindingResult, ModelMap map, 
+			HttpServletRequest request, HttpServletResponse response) {
+
+		List<User> userList = userRepository.findAll();
+		
+		boolean exist = false;
+		for (User u : userList) {
+			if(u.getEmail().equals(user.getEmail()) && u.getPassword().equals(user.getPassword())) {
+				exist = true;
+			}
+		}
+		if(!exist) {
+			// Indicate wrong email or password
+			System.out.println("Wrong email or password");
+			//bindingResult.rejectValue("email", "error.failedLogin");
+			return new ModelAndView("redirect:/");
+		}
+		else {
+			if("Admin".equals(user.getRole())) {
+				// Redirect to user list
+				System.out.println("Redirect to user list");
+				return new ModelAndView("/user-form");
+			}
+			else {
+				// Redirect to skills page
+				System.out.println("Redirect to skills page");
+				return new ModelAndView("redirect:/skills");
+			}
+		}
+		
+		//return null;
+	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -57,6 +92,7 @@ public class UserController {
 	
 	@RequestMapping(value="/registration/{id}")
 	public @ResponseBody String getUser(@PathVariable("id") Long id) {
+		
 		return userRepository.findOne(id).toString();
 	}
 	
@@ -76,7 +112,7 @@ public class UserController {
 			return new ModelAndView("/user-form");
 		}
 		else{
-			
+			userRepository.save(user);
 			if(user.getRole().equals("User")) return new ModelAndView("redirect:/skills");
 			else return new ModelAndView("/user-form");
 		}
