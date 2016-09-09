@@ -2,9 +2,38 @@ package com.ideyatech.hellospring.entity;
 
 import java.util.Date;
 
-public class User {
-	private String firstname, middlename, lastname,
-				email, password, confirmPassword, role;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+@Entity
+@Table(name="user")
+public class User extends BaseEntity {
+	@Column(name="firstname")
+	private String firstname;
+	
+	@Column(name="middlename")
+	private String middlename;
+	
+	@Column(name="lastname")
+	private String lastname;
+	
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="password")
+	private String password;
+	
+	private String confirmPassword;
+	
+	@Column(name="role")
+	private String role;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="birthdate")
 	private Date birthdate;
 
 	public String getFirstname() {
@@ -71,5 +100,4 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	
 }
